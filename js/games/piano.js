@@ -65,7 +65,7 @@ function addChordButton(note, octave, text, offset, x, y, idx, r) {
     const step = note_to_half_step(note + octave);
     const notes = offset.map(x => half_step_to_note(x + step));
     BUTTONS.push({
-        type: "circle", color: COLORS.foreground, outline: COLORS.text, 
+        type: "circle",
         x: x, y: y + (idx * (r * 2 + 8)), r: r, 
         text: note + text, note: notes
     });
@@ -100,23 +100,26 @@ ON_DRAW["piano"] = (canvas, ctx) => {
     for (const button of BUTTONS) {
         let x = button.x + WINDOW_SIZE.width / 2;
         let y = button.y + WINDOW_SIZE.height / 2;
-        ctx.strokeStyle = button.outline;
-        ctx.fillStyle = button.color;
         ctx.beginPath();
         if (button.type === "square") {
+            ctx.strokeStyle = button.outline;
+            ctx.fillStyle = button.color;
             ctx.rect(x - (button.width / 2), y - (button.height / 2), button.width, button.height);
         } else if (button.type === "circle") {
+            ctx.strokeStyle = COLORS.text;
+            ctx.fillStyle = COLORS.foreground;
             ctx.arc(x, y, button.r, 0, 2 * Math.PI);
         }
         ctx.fill();
         ctx.stroke();
         ctx.font = "24px sans-serif";
-        ctx.fillStyle = button.outline; 
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         if (button.type === "square") {
+            ctx.fillStyle = button.outline; 
             ctx.fillText(button.text, x, y + (button.height / 2) - 24);
         } else if (button.type === "circle") {
+            ctx.fillStyle = COLORS.text;
             ctx.fillText(button.text, x, y);
         }
     }
@@ -158,6 +161,6 @@ function note_to_half_step(note) {
 }
 function half_step_to_note(step) {
     const chromatic = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
-    return chromatic[((step % 12) + 12 - 3) % 12] + (Math.floor((step - 3) / 12) + 5);
+    return chromatic[((step % 12) + 24 - 3) % 12] + (Math.floor((step - 3) / 12) + 5);
 }
 })(); // ftr this is how you namespace in JS
