@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
+/* Greenheat Games specific stylesheet */
+:root {
+    --background: transparent;
+    --foreground: rgba(0, 0, 0, 0.25);
+    --text: black;
+}
+body {
+    overflow: hidden;
+    font-family: 'Figtree', Verdana, 'Segoe UI', Tahoma, Geneva, sans-serif;
+    font-size: 24px;
+    line-height: 1.5;
+    background: var(--background);
+    color: var(--text)
+}
+
+/* main */
+canvas {
+    position: absolute !important;
+    top: 0; bottom: 0;
+    left: 0; right: 0;
+    width: 100vw;
+    height: 100vh;
+}
+img {
+    image-rendering: pixelated;
+}
+
+/* settings page */
+.svg-icon {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    left: 16px;
+    top: -32px;
+    fill: var(--text);
+}
+#settings {
+    position: relative;
+    background: var(--foreground);
+    opacity: 0.25;
+    transform: translate(0, calc(100vh - 16px));
+    transition: opacity 0.5s, transform 0.5s;
+    padding: 32px 64px;
+}
+#settings:hover {
+    opacity: 1;
+    transform: translate(0, calc(100vh - 100%));
+}
+#settings > * { margin: 8px 0; }
+#settings button, #settings input { padding: 8px; min-width: 1px; }
+#settings label, #settings button, #settings input {
+    margin-top: auto; margin-bottom: auto;
+    margin-right: 8px;
+    border-radius: 8px;
+    vertical-align: middle;
+}
+#settings button:has(img) { padding: 0; }
+#settings img { border-radius: 8px; }
+#settings label, #settings p { pointer-events: none; }

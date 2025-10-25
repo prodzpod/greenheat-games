@@ -1,0 +1,68 @@
+/**
+* prod's easy flexbox (from prodCSS)
+*/
+/* .hlist: horizontal list block, .vlist: vertical list block */
+[class*=list] {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    align-items: stretch;
+    flex-flow: row wrap;
+}
+.vlist {
+    flex-direction: column;
+}
+.hlist div, .vlist div, .mlist div {
+    flex: 1 0 auto;
+}
+/* .spacer: takes up the remaining space as much as possible */
+.spacer, .header-spacer, .footer-spacer {
+    -ms-flex: 999 0 auto !important;
+    flex: 999 0 auto !important;
+}
+.spacer.soft, .header-spacer.soft, .footer-spacer.soft {
+    -ms-flex: 999 1 auto !important;
+    flex: 999 1 auto !important;
+}
+/* directional classes: force blocks to be on one side */
+.left {
+    left: 0;
+    text-align: left;
+    margin: 0;
+    justify-content: left;
+}
+.right {
+    right: 0;
+    text-align: right;
+    margin: 0;
+    justify-content: right;
+}
+.center {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+}
+.top {
+    top: 0;
+}
+.bottom {
+    bottom: 0;
+}
+.middle {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.stretch {
+    align-self: stretch;
+}
+.around {
+    justify-content: space-around;
+}
+/* line break classes */
+.hard {
+    flex-wrap: nowrap;
+}
+.break {
+    width: 100%;
+}

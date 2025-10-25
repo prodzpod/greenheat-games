@@ -1,0 +1,32 @@
+/**
+* prodCSS that isn't easy flexbox
+*/
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+a, li {
+    display: inline-block;
+    margin-bottom: 0;
+}
+a, span, div, p, em, b, c, ul, li, h1, h2, h3, h4, h5, h6, small, td, input, button, select, textarea {
+    list-style: none;
+}
+a, button {
+    cursor: pointer;
+}
+
+.important {
+    z-index: 999;
+    position: relative;
+}
+*:not(.important) {
+    z-index: 0;
+    position: relative;
+}
+
+.noscroll {
+    user-select: none;
+    cursor: default;
+}

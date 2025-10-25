@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- OPENGRAPH -->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="author" content="prodzpod">
+        <meta name="robots" content="nosnippet">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://prod.kr/">
+        <meta property="og:image:type" content="image/png">
+        <meta name="theme-color" content="#B0FFB0">
+        <!-- ICON -->
+        <link rel="icon" href="/images/favicon.png">
+        <meta property="og:image" content="/favicon.png">
+        <!-- TITLE -->
+        <title>Greenheat Games</title>
+        <meta property="og:title" content="Greenheat Games">
+        <meta name="twitter:title" content="Greenheat Games">
+        <!-- CSS -->
+        <link href="/css/reset.css" rel="stylesheet">
+        <link href="/css/easy-flexbox.css" rel="stylesheet">
+        <link href="/css/other.css" rel="stylesheet">
+        <link href="/css/style.css" rel="stylesheet">
+        <!-- JS -->
+        <script src="/js/main.js"></script>
+        <script src="/js/settings.js"></script>
+        <script src="/js/websocket.js"></script>
+        <script src="/js/render.js"></script>
+        <script src="/js/games/paint.js"></script>
+        <script src="/js/games/circle.js"></script>
+        <script src="/js/games/piano.js"></script>
+        <script src="/js/games/ninja.js"></script>
+        <script src="/js/games/detect-corner.js"></script>
+        <script src="/js/games/detect-latency.js"></script>
+    </head>
+    <body>
+        <!-- MAIN -->
+        <canvas id="main"></canvas>
+        <div id="settings">
+            <svg viewBox="-1 -1 2 2" class="svg-icon"><path d="m.7063-.2062.257.042c.021.0034.0365.0216.0364.0429v.2391c0 .0211-.0151.0392-.036.0428l-.2573.0452c-.0149.0516-.0354.1012-.0612.1482l.1521.2112c.0125.0173.0105.0411-.0045.0562l-.1691.1692c-.0149.0149-.0384.017-.0557.0048l-.2133-.1496c-.047.0262-.097.0471-.1491.0624l-.0454.2561c-.0037.0208-.0217.0359-.0428.0359h-.2392c-.0213 0-.0394-.0154-.0428-.0363l-.0425-.2548c-.052-.015-.1023-.0358-.1498-.0619l-.2118.1483c-.0173.0121-.0408.01-.0557-.0049l-.1691-.1692c-.015-.0151-.017-.0388-.0046-.0561l.1496-.2092c-.0264-.0478-.0474-.0981-.0625-.1504l-.2535-.045c-.0207-.0037-.0359-.0217-.0359-.0428v-.2391c0-.0212.0154-.0394.0364-.0429l.2535-.0422c.0153-.0524.0362-.1028.0625-.1504l-.1478-.2114c-.0121-.0173-.01-.0407.0049-.0556l.169-.169c.0151-.015.0387-.017.0561-.0046l.21.15c.0472-.0258.0973-.0464.1494-.0614l.0416-.2545c.0034-.021.0216-.0365.0429-.0365h.2392c.0211 0 .0392.0152.0428.036l.0448.2559c.0519.0151.1019.0359.1492.062l.2106-.1514c.0173-.0125.0411-.0105.0561.0045l.1691.169c.0149.015.017.0385.0049.0557l-.15.2138c.0257.0469.0463.0965.0614.148zm-1.011.2063c0 .1681.1363.3044.3044.3044.1681 0 .3044-.1363.3044-.3044 0-.1681-.1363-.3044-.3044-.3044-.1681 0-.3044.1363-.3044.3044z"></path></svg>
+            <div class="hlist left">
+                <label>Background:</label>
+                <button onpointerdown="setBackground('transparent');">Transparent</button>
+                <button onpointerdown="setBackground('white');">White</button>
+                <button onpointerdown="setBackground('black');">Black</button>
+                <button onpointerdown="setBackground(`url('https://cdn.discordapp.com/emojis/1300550564660252774.webp?size=96')`);">Silly</button>
+            </div>
+            <p id="settings-game">Current Game: None</p>
+            <div class="hlist left">
+                <label>Start Game:</label>
+                <button onpointerdown="setGame('paint', this)">Paint</button>
+                <button onpointerdown="setGame('circle', this)">Draw a Circle</button>
+                <button onpointerdown="setGame('piano', this)">Piano</button>
+                <button onpointerdown="setGame('ninja', this)">Circle Ninja</button>
+            </div>
+            <div class="hlist left hard">
+                <label>Stream Width</label>
+                <input type="number" id="settings-width" value="1920" min="1" onchange="setResolution()">
+                <label>px, Height</label>
+                <input type="number" id="settings-height" value="1080" min="1" onchange="setResolution()">
+                <label>px</label>
+            </div>
+            <div class="hlist left">
+                <label id="settings-transform">Transform: P(0, 0) S(1920, 1080) T(0)</label>
+                <button onpointerdown="setGame('detect-corner-1', this)">Detect Corners</button>
+                <button onpointerdown="setGame('detect-latency', this)">Detect Latency</button>
+            </div>
+            <div class="hlist left hard">
+                <label>Target FPS:</label>
+                <input type="number" value="60" onchange="TARGET_FPS = this.value">
+                <label id="settings-fps">(Current FPS: 0)</label>
+            </div>
+            <div class="hlist right">
+                <label>Greenheat Games v2</label>
+                <a href="//dashboard.twitch.tv/extensions/yvswtbzy4fj9h89rk06e0wuw2ghfwv"><button><img src="/images/favicon.png" style="width: 52px;"></button></a>
+                <a href="//heat.prod.kr/"><button>Main</button></a>
+                <a href="//github.com/prodzpod/greenheat-games"><button>Source</button></a>
+            </div>
+        </div>
+        <!-- DATA -->
+        <div style="display: none;">
+            <img id="sprite-cursor" src="/images/cursor.png"/>
+            <img id="sprite-apple" src="/images/apple.png"/>
+            <img id="sprite-orange" src="/images/orange.png"/>
+            <img id="sprite-lemon" src="/images/lemon.png"/>
+            <img id="sprite-lime" src="/images/lime.png"/>
+            <img id="sprite-pear" src="/images/pear.png"/>
+            <img id="sprite-watermelon" src="/images/watermelon.png"/>
+            <img id="sprite-pea" src="/images/pea.png"/>
+            <img id="sprite-tire" src="/images/tire.png"/>
+            <img id="sprite-bomb" src="/images/bomb.png"/>
+            <img id="sprite-apple_half" src="/images/apple_half.png"/>
+            <img id="sprite-orange_half" src="/images/orange_half.png"/>
+            <img id="sprite-lemon_half" src="/images/lemon_half.png"/>
+            <img id="sprite-lime_half" src="/images/lime_half.png"/>
+            <img id="sprite-pear_half" src="/images/pear_half.png"/>
+            <img id="sprite-watermelon_half" src="/images/watermelon_half.png"/>
+            <img id="sprite-pea_half" src="/images/pea_half.png"/>
+            <img id="sprite-tire_half" src="/images/tire_half.png"/>
+            <img id="sprite-bomb_half" src="/images/bomb_half.png"/>
+        </div>
+        <!-- MASTODON -->
+        <a rel="me" href="https://mastodon.gamedev.place/@prod" style="display: none;">Mastodon</a>
+        <a rel="me" href="https://mas.to/@prod" style="display: none;">Mastodon 2</a>
+    </body>
+</html>
