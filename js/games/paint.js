@@ -54,6 +54,8 @@ function checkButtons(message) {
         if (Math.hypot(x, y) <= button.r) {
             found = true;
             button.onclick(message);
+            document.getElementById("audio-click").currentTime = 0;
+            document.getElementById("audio-click").play();
         }
     }
     return found;

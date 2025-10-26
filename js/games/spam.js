@@ -6,6 +6,8 @@ ON_START["spam"] = () => {
 ON_MESSAGE["spam"] = (message) => {
     if (message.type !== "click") return;
     POINT += 1;
+    document.getElementById("audio-click").currentTime = 0;
+    document.getElementById("audio-click").play();
 }
 ON_DRAW["spam"] = (canvas, ctx) => {
     ctx.fillStyle = "rgba(255, 0, 0, 0.5)";

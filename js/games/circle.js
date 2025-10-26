@@ -18,6 +18,8 @@ ON_MESSAGE["circle"] = (message) => {
             percentage: percentage,
             time: Date.now()
         });
+        document.getElementById("audio-click").currentTime = 0;
+        document.getElementById("audio-click").play();
         if (!LEADERBOARD[message.id] || LEADERBOARD[message.id].percentage < percentage) {
             LEADERBOARD[message.id] = { name: message.name === "" ? `Anonymous ${message.id}` : message.name, color: message.color, percentage: percentage };
             LEADERBOARD_TOP = Object.values(LEADERBOARD).sort((a, b) => b.percentage - a.percentage).slice(0, 10);

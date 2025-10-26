@@ -7,6 +7,8 @@ ON_START["detect-corner-1"] = () => {
 }
 ON_MESSAGE["detect-corner-1"] = (message) => {
     if (message.id != CHANNEL_ID || message.type !== "click") return;
+    document.getElementById("audio-click").currentTime = 0;
+    document.getElementById("audio-click").play();
     temp.x = message.x; temp.y = message.y;
     setGame("detect-corner-2");
 }
@@ -15,6 +17,8 @@ ON_START["detect-corner-2"] = () => {
 }
 ON_MESSAGE["detect-corner-2"] = (message) => {
     if (message.id != CHANNEL_ID || message.type !== "click") return;
+    document.getElementById("audio-click").currentTime = 0;
+    document.getElementById("audio-click").play();
     GLOBAL_TRANSFORM.x = temp.x;
     GLOBAL_TRANSFORM.y = temp.y;
     GLOBAL_TRANSFORM.xscale = (message.x - temp.x) / WINDOW_SIZE.width;

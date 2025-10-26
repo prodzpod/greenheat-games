@@ -33,16 +33,16 @@ ON_MESSAGE["ninja"] = (message) => {
     else lastPoint[message.id] = {x: message.x, y: message.y};
 }
 const FRUITS = [
-    { whole: "sprite-apple", half: "sprite-apple_half", color: null, size: 64, point: 1 },
-    { whole: "sprite-orange", half: "sprite-orange_half", color: null, size: 64, point: 1 },
-    { whole: "sprite-lemon", half: "sprite-lemon_half", color: null, size: 64, point: 1 },
-    { whole: "sprite-lime", half: "sprite-lime_half", color: null, size: 64, point: 1 },
-    { whole: "sprite-pear", half: "sprite-pear_half", color: null, size: 64, point: 1 },
-    { whole: "sprite-watermelon", half: "sprite-watermelon_half", color: null, size: 128, point: 2 },
-    { whole: "sprite-pea", half: "sprite-pea_half", color: null, size: 32, point: 5 },
-    { whole: "sprite-tire", half: "sprite-tire_half", color: null, size: 64, point: 0 },
-    { whole: "sprite-bomb", half: "sprite-bomb_half", color: "red", size: 64, point: -5},
-    { whole: "sprite-bomb", half: "sprite-bomb_half", color: "red", size: 64, point: -5},
+    { whole: "sprite-apple", half: "sprite-apple_half", color: null, size: 64, point: 1, audio: "audio-click" },
+    { whole: "sprite-orange", half: "sprite-orange_half", color: null, size: 64, point: 1, audio: "audio-click" },
+    { whole: "sprite-lemon", half: "sprite-lemon_half", color: null, size: 64, point: 1, audio: "audio-click" },
+    { whole: "sprite-lime", half: "sprite-lime_half", color: null, size: 64, point: 1, audio: "audio-click" },
+    { whole: "sprite-pear", half: "sprite-pear_half", color: null, size: 64, point: 1, audio: "audio-click" },
+    { whole: "sprite-watermelon", half: "sprite-watermelon_half", color: null, size: 128, point: 2, audio: "audio-click" },
+    { whole: "sprite-pea", half: "sprite-pea_half", color: null, size: 32, point: 5, audio: "audio-pizza" },
+    { whole: "sprite-tire", half: "sprite-tire_half", color: null, size: 64, point: 0, audio: "audio-tick" },
+    { whole: "sprite-bomb", half: "sprite-bomb_half", color: "red", size: 64, point: -5, audio: "audio-bomb" },
+    { whole: "sprite-bomb", half: "sprite-bomb_half", color: "red", size: 64, point: -5, audio: "audio-bomb" },
 ];
 function detectSlice(message) {
     for (const id in FRUIT_TIMELINE) {
@@ -75,6 +75,8 @@ function detectSlice(message) {
         });
         updateLeaderboard();
         status.collected.push(message.id);
+        document.getElementById(status.fruit.audio).currentTime = 0;
+        document.getElementById(status.fruit.audio).play();
     }
 }
 function pointToSegment(a, b, p) {

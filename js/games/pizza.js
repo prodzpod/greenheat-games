@@ -12,6 +12,8 @@ ON_MESSAGE["pizza"] = (message) => {
     LEADERBOARD[message.id] ??= { name: message.name === "" ? `Anonymous ${message.id}` : message.name, color: message.color, point: 0 };
     LEADERBOARD[message.id].point += 1;
     LEADERBOARD_ORDER = Object.keys(LEADERBOARD).sort((a, b) => LEADERBOARD[b].point - LEADERBOARD[a].point);
+    document.getElementById("audio-pizza").currentTime = 0;
+    document.getElementById("audio-pizza").play();
 }
 ON_DRAW["pizza"] = (canvas, ctx) => {
     const BUTTON = { x: WINDOW_SIZE.width - 80, y: 80, r: 64 };
