@@ -26,6 +26,8 @@
         <script src="/js/settings.js"></script>
         <script src="/js/websocket.js"></script>
         <script src="/js/render.js"></script>
+        <script src="/js/games/pizza.js"></script>
+        <script src="/js/games/spam.js"></script>
         <script src="/js/games/paint.js"></script>
         <script src="/js/games/circle.js"></script>
         <script src="/js/games/piano.js"></script>
@@ -48,6 +50,8 @@
             <p id="settings-game">Current Game: None</p>
             <div class="hlist left">
                 <label>Start Game:</label>
+                <button onpointerdown="setGame('pizza', this)">Free Pizza</button>
+                <button onpointerdown="setGame('spam', this)">Spam</button>
                 <button onpointerdown="setGame('paint', this)">Paint</button>
                 <button onpointerdown="setGame('circle', this)">Draw a Circle</button>
                 <button onpointerdown="setGame('piano', this)">Piano</button>
