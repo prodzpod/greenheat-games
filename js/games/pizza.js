@@ -1,9 +1,9 @@
 (() => {
-let LEADERBOARD;
-let LEADERBOARD_ORDER;
+let LEADERBOARD = {};
+let LEADERBOARD_ORDER = [];
 ON_START["pizza"] = () => {
-    LEADERBOARD = {};
-    LEADERBOARD_ORDER = [];
+    // LEADERBOARD = {};
+    // LEADERBOARD_ORDER = [];
 }
 ON_MESSAGE["pizza"] = (message) => {
     const BUTTON = { x: WINDOW_SIZE.width - 80, y: 80, r: 64 };

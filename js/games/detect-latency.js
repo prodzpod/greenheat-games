@@ -5,7 +5,7 @@ ON_START["detect-latency"] = () => {
     lastTime = Date.now();
 }
 ON_MESSAGE["detect-latency"] = (message) => {
-    if (message.type !== "click") return;
+    if (message.id != CHANNEL_ID || message.type !== "click") return;
     document.getElementById("audio-click").currentTime = 0;
     document.getElementById("audio-click").play();
     let w = Math.floor(WINDOW_SIZE.width / 256);

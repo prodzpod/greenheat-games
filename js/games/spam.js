@@ -2,6 +2,8 @@
 let POINT
 ON_START["spam"] = () => {
     POINT = 0;
+    document.getElementById("audio-gong").currentTime = 0;
+    document.getElementById("audio-gong").play();
 }
 ON_MESSAGE["spam"] = (message) => {
     if (message.type !== "click") return;

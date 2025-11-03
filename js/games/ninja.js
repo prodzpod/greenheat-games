@@ -12,7 +12,7 @@ ON_START["ninja"] = () => {
     for (let i = 0; i < 10; i++) addInstance({
         type: "text", id: "leaderboard-" + i, 
         font: "24px sans-serif", align: {x: -1, y: -1}, 
-        x: 16, y: 32 * i - 16,
+        x: 16, y: 32 * i + 16,
         text: "", fill: "black"
     });
 }
