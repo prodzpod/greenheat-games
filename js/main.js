@@ -6,11 +6,16 @@ let WINDOW_SIZE = {width: 1, height: 1};
 let LATENCY = 0;
 let CURRENT_GAME = "";
 let TARGET_FPS = 60;
+let CONFIG;
 
 window.onload = async () => {
     CHANNEL_NAME = window.location.pathname.split("/")[1];
     let CHANNEL = await (await fetch("//prod.kr/api/getid?name=" + CHANNEL_NAME)).json();
-    if (CHANNEL) CHANNEL_ID = CHANNEL.id;
+    if (CHANNEL) {
+        CHANNEL_ID = CHANNEL.id;
+        CONFIG = await (await fetch("//heat.prod.kr/" + CHANNEL_NAME + "/config")).json();
+        document.querySelector(':root').style.setProperty("--color", CONFIG.color);
+    }
     initializeWebsocket();
     initializeRenderer();
     window.onresize();
@@ -21,6 +26,8 @@ window.onresize = async () => {
     WINDOW_SIZE.height = Math.max(1, window.innerHeight);
     document.getElementById("main").width = WINDOW_SIZE.width;
     document.getElementById("main").height = WINDOW_SIZE.height;
+    document.getElementById("overlay").style.width = WINDOW_SIZE.width + "px";
+    document.getElementById("overlay").style.height = WINDOW_SIZE.height + "px";
     updateTransform();
     if (ON_RESIZE[CURRENT_GAME]) await ON_RESIZE[CURRENT_GAME]();
 }

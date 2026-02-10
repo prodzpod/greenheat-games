@@ -1,3 +1,4 @@
+let RENDER_CURSORS = true;
 let canvas, ctx;
 function initializeRenderer() {
     canvas = document.getElementById("main");
@@ -16,15 +17,17 @@ function loopRender() {
     ctx.filter = "none";
     if (ON_DRAW[CURRENT_GAME]) ON_DRAW[CURRENT_GAME](canvas, ctx);
     // cursor
-    for (const k of Object.keys(cursors)) if (start - cursors[k].time >= 1000) delete cursors[k];
-    for (const cursor of Object.values(cursors)) {
-        let filter = `opacity(${100 - ((start - cursor.time) / 10)}%)`;
-        if (cursor.color) filter += " " + rgbToFilter(cursor.color);
-        ctx.filter = filter;
-        ctx.drawImage(getSprite("sprite-cursor"), cursor.x, cursor.y);
-        if (cursor.name !== "") {
-            ctx.fillStyle = cursor.color;
-            ctx.fillText(cursor.name, cursor.x + 32, cursor.y + 32);
+    if (RENDER_CURSORS) {
+        for (const k of Object.keys(cursors)) if (start - cursors[k].time >= 1000) delete cursors[k];
+        for (const cursor of Object.values(cursors)) {
+            let filter = `opacity(${100 - ((start - cursor.time) / 10)}%)`;
+            if (cursor.color) filter += " " + rgbToFilter(cursor.color);
+            ctx.filter = filter;
+            ctx.drawImage(getSprite("sprite-cursor"), cursor.x, cursor.y);
+            if (cursor.name !== "") {
+                ctx.fillStyle = cursor.color;
+                ctx.fillText(cursor.name, cursor.x + 32, cursor.y + 32);
+            }
         }
     }
     // end
@@ -60,6 +63,18 @@ function addCursor(message) {
         x: message.x,
         y: message.y
     };
+    if (RENDER_CURSORS) {
+        switch (message.type) {
+            case "click": {
+                let dot = insertElement("div", "overlay", "clickdot").with("style", `left: ${message.x / WINDOW_SIZE.width * 100}%; top: ${message.y / WINDOW_SIZE.height * 100}%;`);
+                setTimeout(() => { dot.parentElement.removeChild(dot); }, 500);
+            } break;
+            case "release": {
+                let dot = insertElement("div", "overlay", "clickdot release").with("style", `left: ${message.x / WINDOW_SIZE.width * 100}%; top: ${message.y / WINDOW_SIZE.height * 100}%;`);
+                setTimeout(() => { dot.parentElement.removeChild(dot); }, 500);
+            } break;
+        }
+    }
 }
 
 function rgbToFilter(color) {

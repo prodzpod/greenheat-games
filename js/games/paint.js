@@ -130,7 +130,7 @@ const BUTTONS = [
         x: buttonPosition(0), y: buttonPosition(5), r: BUTTON_RADIUS, 
         draw: (_, ctx, button) => { drawText("Clear", ctx, button); },
         onclick: (message) => { 
-            if (message.id !== CHANNEL_ID) return;
+            if (message.id != CHANNEL_ID) return;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
     },
