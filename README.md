@@ -24,7 +24,7 @@ Due to the nature of the internet and everyone living across the ocean, there ar
 
 GreenHeat gives you everything you need to overcome this problem, allowing for things like the fruit ninja clone in GreenHeat Games.
 
-![](https://heat.prod.kr/images/latency.png)
+![](https://heat.prod.kr/latency.png)
 
 Two fields, **time** and **latency** are important in the packet. **latency** refers to the time it took for the click packet to arrive from chatter's PC to Twitch's servers, where **time** refers to the point in time where the packet reached prod.kr. The goal is to get the timestamp for when the chatter clicked the screen, so it would feel accurate to the chatter.
 
